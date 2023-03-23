@@ -11,8 +11,6 @@ app.use(routes);
 
 db.once("open", () => {
   app.listen(PORT, () => {
-    console.log(
-      `API server is running on port ${PORT} for the Mango Social Network!`
-    );
+    console.log(`ur gud lol!`);
   });
 });
