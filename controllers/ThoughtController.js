@@ -4,14 +4,14 @@ const User = require("../models/users");
 
 // Exporting all functions within the export parameter.
 module.exports = {
-  // Get all Thoughts
+  // Function to get all thoughts.
   getThoughts(req, res) {
     Thought.find()
       .then((data) => res.json(data))
       .catch((err) => res.status(500).json(err));
   },
 
-  // Get Thought by ID
+  // Function to get thought by ID.
   getOneThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
       .then((thoughtData) =>
@@ -25,7 +25,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-  // Create a thought
+  // Function to  create a thought.
   newThought(req, res) {
     Thought.create(req.body)
       .then((thoughtData) => {
@@ -48,7 +48,7 @@ module.exports = {
       });
   },
 
-  // Update a thought
+  // Function to update a thought.
   updateThought(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -68,7 +68,7 @@ module.exports = {
       });
   },
 
-  // Delete a thought
+  // Function to delete a thought.
   deleteThought(req, res) {
     Thought.findOneAndRemove({ _id: req.params.thoughtId })
       .then((thoughtData) =>
@@ -82,7 +82,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-  // Full route path is /api/thoughts/:thoughtId/reactions
+  // Function to create a new reaction.
   newReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -100,7 +100,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-  // Full route path is /api/thoughts/:thoughtId/reactions/:reactionId
+  // Function to delete a reaction.
   deleteReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
