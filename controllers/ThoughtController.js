@@ -38,8 +38,7 @@ module.exports = {
       .then((userData) =>
         !userData
           ? res.status(404).json({
-              message:
-                "No user found with that ID. Please ensure you have the correct id and try again.",
+              message: err,
             })
           : res.json("Thought has been created")
       )
