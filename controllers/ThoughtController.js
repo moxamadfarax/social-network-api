@@ -27,6 +27,13 @@ module.exports = {
 
   // Function to  create a thought.
   newThought(req, res) {
+    // Check that the required fields are present in the request body
+    if (!req.body.thoughtText || !req.body.username || !req.body.userId) {
+      return res.status(400).json({
+        message: "Request body must include thoughtText, username, and userId",
+      });
+    }
+
     Thought.create(req.body)
       .then((thoughtData) => {
         return User.findOneAndUpdate(
@@ -35,15 +42,19 @@ module.exports = {
           { new: true }
         );
       })
-      .then((userData) =>
-        !userData
-          ? res.status(404).json({
-              message: err,
-            })
-          : res.json("Thought has been created")
-      )
+      .then((userData) => {
+        if (!userData) {
+          // Handle case where user was not found
+          return res.status(404).json({
+            message: "User not found with id " + req.body.userId,
+          });
+        }
+        // Return success message
+        res.json({ message: "Thought has been created" });
+      })
       .catch((err) => {
-        res.status(500).json(err);
+        console.error(err);
+        res.status(500).json({ message: "Internal server error" });
       });
   },
 
@@ -112,7 +123,7 @@ module.exports = {
               message:
                 "No thought found with that ID. Please ensure you have the correct id and try again.",
             })
-          : res.json(thoughtData)
+          : res.json(`Reaction successfuly deleted.`)
       )
       .catch((err) => res.status(500).json(err));
   },

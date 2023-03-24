@@ -27,7 +27,7 @@ module.exports = {
   // Function to create new user.
   createUser(req, res) {
     User.create(req.body)
-      .then((userData) => res.json(userData))
+      .then((userData) => res.json(`${userData.username} successfuly added`))
       .catch((err) => res.status(500).json(err));
   },
 
@@ -44,7 +44,7 @@ module.exports = {
               message:
                 "No user found with this id. Please ensure you entered the correct id.",
             })
-          : res.json(userData)
+          : res.json(`${userData.username} successfuly updated`)
       )
       .catch((err) => {
         res.status(500).json(err);
@@ -60,7 +60,9 @@ module.exports = {
               message:
                 "No user found with this id. Please ensure you entered the correct id.",
             })
-          : res.json({ message: "User successfully deleted!" })
+          : res.json({
+              message: `${userData.username} successfully deleted!`,
+            })
       )
       .catch((err) => res.status(500).json(err));
   },
@@ -105,6 +107,13 @@ module.exports = {
                 "No user found with this id. Please ensure you entered the correct id.",
             })
           : res.json({ message: "Friend successfully removed!" })
-      );
+      )
+      .catch((error) => {
+        console.error(error);
+        res.status(500).json({
+          message:
+            "Internal server error. Please ensure that the ID's you have entered are valid or try again later.",
+        });
+      });
   },
 };
