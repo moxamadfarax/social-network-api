@@ -5,6 +5,8 @@
 This project is a database api that utilizes mongodb via the npm package [mongoose](https://www.npmjs.com/package/mongoose).
 This project uses [express](https://www.npmjs.com/package/express) as it's server [dayjs](https://www.npmjs.com/package/dayjs) for date formatting, and [nodemon](https://www.npmjs.com/package/nodemon) for running the server.
 
+Click [here](https://drive.google.com/file/d/1-NkYaEAvIMYgc8A_x1wlp7eHps7A4ibZ/view) for a demo video on how to use this api using insomnia
+
 - Below are images of the api in use using insomnia.
 
   ![Image of api in use](img/screenshot1.png)
